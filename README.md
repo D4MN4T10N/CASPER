@@ -1,2 +1,2 @@
-# CASPER
-👻 CASPER python based malware
+# 👻 CASPER
+For educational use only!
