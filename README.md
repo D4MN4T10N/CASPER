@@ -1,5 +1,6 @@
-# 👻 CASPER (For educational use only!)
+# 👻 CASPER
 
+For educational use only!
 ```
 Uses socket to connect back to our server that listens for incoming connections, the data is encoded with shitty base64 and a not so secret key since it's in the source code lulz.
 ```
