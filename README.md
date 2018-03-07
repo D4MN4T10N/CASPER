@@ -1,5 +1,15 @@
-# 👻 CASPER
-For educational use only!
+# 👻 CASPER (For educational use only!)
+
+```
+Uses socket to connect back to our server that listens for incoming connections, the data is encoded with shitty base64 and a not so secret key since it's in the source code lulz.
+```
+
+#### Commands:
+* Shell access
+* Screenshot
+* Download execute
+* Persistence
+* Clean
 
 #### Anti-VM and Anti-Sandbox:
 * Lowest amount of total disk space accepted before executing
@@ -10,10 +20,3 @@ For educational use only!
 * Check if a debugger is present with IsDebuggerPresent
 * Check for known hostnames
 * Check for user interaction before main code is executed
-
-#### Commands/Plugins:
-* Download execute
-* Persistence
-* Self-removal
-* Shell access
-* Screenshot
