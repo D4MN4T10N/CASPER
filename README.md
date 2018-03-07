@@ -1,9 +1,17 @@
 # 👻 CASPER
 For educational use only!
 
-#### Features:
-* Leverages 10 different anti-sandbox & anti-vm detection functions
-* Command and control server either via DNS/SOCKET/SMTP/HTTP/HTTPS
+#### Anti-VM and Anti-Sandbox:
+* Lowest amount of total disk space accepted before executing
+* Lowest amount of total memory/ram accepted before executing
+* Iterate through all the running processes in attempt to find known processes
+* Iterate through files in attempt to find known DLL files and drivers
+* Iterate through max 20 network interfaces and match it against known MACs
+* Check if a debugger is present with IsDebuggerPresent
+* Check for known hostnames
+* Get User-Input by pressing OK or Exit on a messagebox before we execute the main code
+
+#### Commands/Plugins:
 * Download execute
 * Persistence
 * Self-removal
