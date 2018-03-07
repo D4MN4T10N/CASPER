@@ -9,7 +9,7 @@ For educational use only!
 * Iterate through max 20 network interfaces and match it against known MACs
 * Check if a debugger is present with IsDebuggerPresent
 * Check for known hostnames
-* Get User-Input by pressing OK or Exit on a messagebox before we execute the main code
+* Check for user interaction before main code is executed
 
 #### Commands/Plugins:
 * Download execute
