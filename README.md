@@ -6,11 +6,11 @@ Uses socket to connect back to our server that listens for incoming connections,
 ```
 
 #### Commands:
-* Shell access *Testing*
-* Screenshot
-* Download execute
-* Persistence
-* Clean
+* shell *(Execute shell commands)*
+* screenshot *(Screenshots up to two monitors)*
+* download *(Download a executable from url and execute it)*
+* infect *(Adds itself to startup)*
+* removal *(Removes itself)*
 
 #### Anti-VM and Anti-Sandbox:
 * Lowest amount of total disk space accepted before executing
