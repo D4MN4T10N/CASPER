@@ -19,5 +19,5 @@ Uses socket to connect back to our server that listens for incoming connections,
 * Go through files in attempt to find known DLL files and drivers
 * Go through max 20 network interfaces and match it against known MACs
 * Check if a debugger is present with IsDebuggerPresent
-* Check for known hostnames
 * Check for user interaction before main code is executed
+* Check for known hostnames
