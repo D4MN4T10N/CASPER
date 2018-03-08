@@ -6,7 +6,7 @@ Uses socket to connect back to our server that listens for incoming connections,
 ```
 
 #### Commands:
-* Shell access *Testing
+* Shell access *Testing*
 * Screenshot
 * Download execute
 * Persistence
