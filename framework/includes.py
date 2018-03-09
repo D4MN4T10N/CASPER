@@ -25,7 +25,6 @@ import win32console
 # Plugins and features
 from antivm import *
 from encoder import *
-from execute import *
 from infect import *
 from downexec import *
 from screenshot import *
