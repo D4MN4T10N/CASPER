@@ -69,6 +69,9 @@ if __name__ == '__main__':
 								file.close()
 							except Exception as e:
 								print "[casper server] can't write screenshot.png to disk >> {}".format(e)
+
+							data = decode(client.recv(11048576))
+							print data	
 						elif (input == "quit"):
 							sys.exit()
 						else:
