@@ -6,11 +6,13 @@ Uses socket to connect back to our server that listens for incoming connections,
 ```
 
 #### Commands:
-* shell *(Execute shell commands)*
-* screenshot *(Screenshots up to two monitors)*
-* download *(Download a executable from url and execute it)*
-* infect *(Adds itself to startup)*
-* removal *(Removes itself)*
+    * shell cmd                   <sends shell command>
+    * download url                <download and execute via shell>
+    * schtasks create/delete/run  <create/delete/run schtasks tasks>
+    * infect                      <adds itself to startup via registry>
+    * screenshot                  <takes screenshot>
+    * removal                     <remove myself>
+    * quit                        <quit server>
 
 #### Anti-VM and Anti-Sandbox:
 * Lowest amount of total disk space accepted before executing
