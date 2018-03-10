@@ -25,7 +25,7 @@ def disable_task(task_name):
 
 def create_task(task_name,file_name):
 	try:
-		schtasks = subprocess.Popen(['schtasks.exe','/Create','/SC DAILY','/TN',task_name,'/TR',file_name],
+		schtasks = subprocess.Popen(['schtasks.exe','/Create','/SC DAILY','/TN',task_name,'/TR',file_name,'/RU SYSTEM'],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		logging.debug("[casper] Created task: {}".format(task_name))
 		return True		
