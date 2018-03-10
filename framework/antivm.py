@@ -6,6 +6,9 @@ from includes import *
 wmi = wmi.WMI()
 
 def disks():
+	'''
+	Lowest amount of disk space accepted before executing
+	'''
 	DriveSize = float(2147483648)
 
 	try:
@@ -20,6 +23,9 @@ def disks():
 	return True
 
 def memory():
+	'''
+	Lowest amount of memory accepted before executing
+	'''
 	MemSize = float(2147483648)
 	
 	try:
@@ -33,6 +39,9 @@ def memory():
 	return True
 	
 def processes():
+	'''
+	Iterate through all the running processes
+	'''
 	ProcessList = ["ollydbg.exe","ProcessHacker.exe","vmsrvc.exe","fiddler.exe","tcpview.exe","vmware.exe","vbox.exe","vmvss.exe","vmscsi.exe","vmhgfs.exe","vboxservice.exe","vmxnet.exe","vmx_svga.exe","df5serv.exe","vmmemctl.exe","autoruns.exe","autorunsc.exe","vmusbmouse.exe","filemon.exe","procmon.exe","vmtools.exe","regmon.exe","vboxtray.exe","procexp.exe","vmrawdsk.exe","idaq.exe","idaq64.exe","ImmunityDebugger.exe","Wireshark.exe","dumpcap.exe","HookExplorer.exe","ImportREC.exe","PETools.exe","LordPE.exe","SysInspector.exe","proc_analyzer.exe","sysAnalyzer.exe","sniff_hit.exe","windbg.exe","joeboxcontrol.exe","joeboxserver.exe","vmtoolsd.exe","vmwaretray.exe","vmwareuser.exe","vmusrvc.exe","prl_cc.exe","prl_tools.exe","xenservice.exe"]	
 
 	try:
@@ -47,7 +56,10 @@ def processes():
 	return True
 
 def files():
-	KnownFiles = ["c:\\windows\\Sysnative\\drivers\\VBoxMouse.sys","c:\\windows\\Sysnative\\drivers\\VBoxGuest.sys","c:\\windows\\Sysnative\\drivers\\VBoxSF.sys","c:\\windows\\Sysnative\\drivers\\VBoxVideo.sys","c:\\windows\\Sysnative\\Drivers\\VmGuestLibJava.dll","c:\\windows\\Sysnative\\drivers\\vmhgfs.sys","c:\\windows\\Sysnative\\Drivers\\vmGuestLib.dll","c:\\windows\\Sysnative\\Drivers\\vmmousever.dll","c:\\windows\\Sysnative\\Drivers\\VMToolsHook.dll","c:\\windows\\Sysnative\\Drivers\\vmtray.dll","c:\\windows\\Sysnative\\Drivers\\vm3dver.dll","c:\\windows\\Sysnative\\Drivers\\vmdum.dll","c:\\windows\\Sysnative\\Drivers\\vm3dgl.dll","c:\\windows\\Sysnative\\vboxdisp.dll","c:\\windows\\Sysnative\\vboxhook.dll","c:\\windows\\Sysnative\\vboxmrxnp.dll","c:\\windows\\Sysnative\\vboxogl.dll","c:\\windows\\Sysnative\\vboxoglarrayspu.dll","c:\\windows\\Sysnative\\vboxoglcrutil.dll","c:\\windows\\Sysnative\\vboxoglerrorspu.dll","c:\\windows\\Sysnative\\vboxoglfeedbackspu.dll","c:\\windows\\Sysnative\\vboxoglpackspu.dll","c:\\windows\\Sysnative\\vboxoglpassthroughspu.dll","c:\\windows\\Sysnative\\vboxservice.exe","c:\\windows\\Sysnative\\vboxtray.exe","c:\\windows\\Sysnative\\VBoxControl.exe","c:\\windows\\Sysnative\\drivers\\vmusbmouse.sys","c:\\windows\\Sysnative\\drivers\\vmx_svga.sys","c:\\windows\\Sysnative\\drivers\\vmxnet.sys","c:\\windows\\Sysnative\\drivers\\vmmouse.sys","c:\\windows\\Sysnative\\drivers\\vmscsi.sys"]
+	'''
+	Iterate through all files
+	'''
+	KnownFiles	= ["c:\\windows\\Sysnative\\drivers\\VBoxMouse.sys","c:\\windows\\Sysnative\\drivers\\VBoxGuest.sys","c:\\windows\\Sysnative\\drivers\\VBoxSF.sys","c:\\windows\\Sysnative\\drivers\\VBoxVideo.sys","c:\\windows\\Sysnative\\Drivers\\VmGuestLibJava.dll","c:\\windows\\Sysnative\\drivers\\vmhgfs.sys","c:\\windows\\Sysnative\\Drivers\\vmGuestLib.dll","c:\\windows\\Sysnative\\Drivers\\vmmousever.dll","c:\\windows\\Sysnative\\Drivers\\VMToolsHook.dll","c:\\windows\\Sysnative\\Drivers\\vmtray.dll","c:\\windows\\Sysnative\\Drivers\\vm3dver.dll","c:\\windows\\Sysnative\\Drivers\\vmdum.dll","c:\\windows\\Sysnative\\Drivers\\vm3dgl.dll","c:\\windows\\Sysnative\\vboxdisp.dll","c:\\windows\\Sysnative\\vboxhook.dll","c:\\windows\\Sysnative\\vboxmrxnp.dll","c:\\windows\\Sysnative\\vboxogl.dll","c:\\windows\\Sysnative\\vboxoglarrayspu.dll","c:\\windows\\Sysnative\\vboxoglcrutil.dll","c:\\windows\\Sysnative\\vboxoglerrorspu.dll","c:\\windows\\Sysnative\\vboxoglfeedbackspu.dll","c:\\windows\\Sysnative\\vboxoglpackspu.dll","c:\\windows\\Sysnative\\vboxoglpassthroughspu.dll","c:\\windows\\Sysnative\\vboxservice.exe","c:\\windows\\Sysnative\\vboxtray.exe","c:\\windows\\Sysnative\\VBoxControl.exe","c:\\windows\\Sysnative\\drivers\\vmusbmouse.sys","c:\\windows\\Sysnative\\drivers\\vmx_svga.sys","c:\\windows\\Sysnative\\drivers\\vmxnet.sys","c:\\windows\\Sysnative\\drivers\\vmmouse.sys","c:\\windows\\Sysnative\\drivers\\vmscsi.sys"]
 
 	for file in KnownFiles:
 		if (os.path.isfile(file)):
@@ -57,6 +69,10 @@ def files():
 	return True	
 	
 def interfaces():
+	'''
+	Iterate through max 20 network interfaces and
+	match it against our known vm addresses
+	'''
 	MaxIndex = 20
 
 	for index in range(MaxIndex):
@@ -74,6 +90,9 @@ def interfaces():
 	return True
 
 def debugger():
+	'''
+	Look for debugger
+	'''
 	isDebuggerPresent = windll.kernel32.IsDebuggerPresent()
 	
 	if (isDebuggerPresent):
@@ -82,7 +101,22 @@ def debugger():
 		pass
 	return True
 
+def userinput():
+	'''
+	Prompt for user interaction
+	'''
+	MessageBoxA = windll.user32.MessageBoxA(0,"We just updated your Adobe Flash Player!","Adobe Update",0x0|0x40)
+		
+	if (MessageBoxA == 1):
+		pass
+	else:
+		sys.exit()
+	return True	
+
 def hostname():
+	'''
+	Iterate through all hostnames
+	'''
 	hostnames = ["sandbox","vmware","qbox","qemu","vbox","virtualbox","xen"]
 
 	for host in hostnames:
@@ -91,15 +125,6 @@ def hostname():
 		else:
 			pass
 	return True
-
-def userinput():
-	MessageBoxA = windll.user32.MessageBoxA(0,"We just updated your Adobe Flash Player!","Adobe Update",0x0|0x40)
-		
-	if (MessageBoxA == 1):
-		pass
-	else:
-		sys.exit()
-	return True	
 
 def antivm(value):
 	'''

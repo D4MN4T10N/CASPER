@@ -1,7 +1,5 @@
 '''
 Part of Casper Framework
-
-This is stolen cuz why not KEK
 '''
 from includes import *
 
