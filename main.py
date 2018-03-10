@@ -11,7 +11,7 @@ logging.debug("[casper] Teh n0t s0 fr13ndly gh0st!")
 def main():
 	try:
 		if (sys.platform.lower().find("win") == 0):
-			# set hidden to 0 to disable the function
+			# set hidden to 0 to hide console window
 			if (hidden(1) == True):
 				# set antivm to 0 to disable the function
 				if (antivm(1) == True):
