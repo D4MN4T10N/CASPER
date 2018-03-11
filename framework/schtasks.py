@@ -4,6 +4,10 @@ Part of Casper Framework
 from includes import *
 
 def enable_task(task_name):
+	"""
+	enable a scheduled task, returns True if sucess and
+	False if fails
+	"""
 	try:
 		schtasks = subprocess.Popen(['schtasks.exe','/Change','/TN',task_name,'/ENABLE'],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -14,6 +18,10 @@ def enable_task(task_name):
 		return False
 
 def disable_task(task_name):
+	"""
+	disables a scheduled task, returns True if sucess and
+	False if fails
+	"""
 	try:
 		schtasks = subprocess.Popen(['schtasks.exe','/Change','/TN',task_name,'/DISABLE'],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -24,6 +32,10 @@ def disable_task(task_name):
 		return False		
 
 def create_task(task_name,file_name):
+	"""
+	create a scheduled task as SYSTEM, returns True if sucess and
+	False if fails
+	"""
 	try:
 		schtasks = subprocess.Popen(['schtasks.exe','/Create','/SC DAILY','/TN',task_name,'/TR',file_name,'/RU SYSTEM'],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -34,6 +46,10 @@ def create_task(task_name,file_name):
 		return False
 
 def del_task(task_name):
+	"""
+	delete a scheduled task, returns True if sucess and
+	False if fails
+	"""
 	try:
 		schtasks = subprocess.Popen(['schtasks.exe','/Delete','/TN',task_name],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -44,6 +60,10 @@ def del_task(task_name):
 		return False		
 
 def run_task(task_name):
+	"""
+	run a scheduled task, returns True if sucess and
+	False if fails
+	"""
 	try:
 		schtasks = subprocess.Popen(['schtasks.exe','/Run','/TN',task_name],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
