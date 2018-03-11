@@ -11,7 +11,7 @@ def remove_payload(file):
 		try:
 			os.remove(os.path.join(temp_directory(),file))
 			return True
-		except:
+		except Exception as e:
 			return False
 	else:
 		logging.debug("[casper] payload not found")
@@ -28,7 +28,7 @@ def payload(file):
 		pload.write(payload)
 		pload.close()
 		return True
-	except:
+	except Exception as e:
 		return False
 
 def payload_run(file):
@@ -39,7 +39,7 @@ def payload_run(file):
 	try:
 		os.system(os.path.join(temp_directory(),file))
 		return True
-	except:
+	except Exception as e:
 		return False
 
 def removal(file):
@@ -66,3 +66,5 @@ def removal(file):
 	else:
 		logging.debug("[casper] Error, couldn't remove payload from disk")
 		return False
+		
+removal("temp.bat")
