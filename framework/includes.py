@@ -24,12 +24,12 @@ import win32gui
 import win32console
 
 # Plugins and features
-from schtasks import *
 from clone import *
+from infect import *
+from schtasks import *
 from hide import *
 from antivm import *
 from encoder import *
 from control import *
 from downexec import *
-from infect import *
 from removal import *
