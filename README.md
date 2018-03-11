@@ -9,6 +9,7 @@ Uses socket to connect back to our server that listens for incoming connections,
     * shell cmd                   <sends shell command>
     * download url                <download and execute via shell>
     * schtasks create/delete/run  <create/delete/run schtasks tasks>
+    * clone                       <clones myself to temp directory>
     * infect                      <adds itself to startup via registry>
     * screenshot                  <takes screenshot>
     * removal                     <remove myself>
