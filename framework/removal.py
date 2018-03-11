@@ -7,9 +7,9 @@ def remove_payload(file):
 	"""
 	if we find the payload on disk, delete it and move on
 	"""
-	if os.path.isfile(file) == True:
+	if os.path.isfile(os.path.join(temp_directory(),file)) == True:
 		try:
-			os.remove(file)
+			os.remove(os.path.join(temp_directory(),file))
 			return True
 		except:
 			return False
