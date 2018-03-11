@@ -66,5 +66,3 @@ def removal(file):
 	else:
 		logging.debug("[casper] Error, couldn't remove payload from disk")
 		return False
-		
-removal("temp.bat")
