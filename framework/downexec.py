@@ -4,6 +4,10 @@ Part of Casper Framework
 from includes import *
 
 def execute(file):
+	"""
+	create a process and return True if success
+	else False
+	"""
 	try:
 		process_create = os.popen(file)
 		process_result = process_create.read()
@@ -12,6 +16,9 @@ def execute(file):
 		return False
 
 def download(url,file):
+	"""
+	download a file to disk
+	"""
 	try:
 		urllib.urlretrieve(url,file)
 		return True
@@ -19,6 +26,9 @@ def download(url,file):
 		return False
 
 def autodelete(file):
+	"""
+	delete the file after execution
+	"""
 	try:
 		os.remove(file)
 		return True
@@ -26,6 +36,10 @@ def autodelete(file):
 		return False
 
 def download_execute(url,file,autod):
+	"""
+	download execute function, autod 0 will not delete
+	file execution
+	"""
 	if (download(url,file) == True):
 		logging.debug("[casper] Successfully downloaded file")
 		if (execute(file) == True):
