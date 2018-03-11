@@ -26,11 +26,7 @@ def socket_test():
 			logging.debug("[casper] Unable to connect > {}".format(e))
 		socket_server.close()
 
-def socket_control():
-	host = "127.0.0.1"
-	port = 4445
-	buffer = 1048576
-	
+def socket_control(host,port,buffer):
 	if (socket_test() == True):
 		while True:
 			if (socket_create() == True):
