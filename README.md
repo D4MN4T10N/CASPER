@@ -1,9 +1,9 @@
 # 👻 CASPER
 
 For educational use only!
-```
-Uses socket to connect back to our server that listens for incoming connections, the data is encoded with shitty base64 and a not so secret key since it's in the source code lulz.
-```
+
+#### Simple C&C:
+Connects back to command server where we are listning for incoming connections. The data between server and casper is encoded with base64 encoding using a key to obfuscate it a little bit. 
 
 #### Commands:
     * shell cmd                   <sends shell command>
