@@ -33,8 +33,7 @@ def payload(file):
 
 def payload_run(file):
 	"""
-	payload template for killing process and removing
-	it after execution, very budget lulz
+	run the payload
 	"""
 	try:
 		os.system(os.path.join(temp_directory(),file))
