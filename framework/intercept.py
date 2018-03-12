@@ -4,33 +4,41 @@ Part of Casper Framework
 from includes import *
 
 HKEY_key = r"Software\Microsoft\Windows\CurrentVersion\Internet Settings"
-HKEY_open = OpenKey(HKEY_CURRENT_USER,HKEY_key,0,KEY_ALL_ACCESS)
 HKEY_create = CreateKey(HKEY_CURRENT_USER,HKEY_key)
 
-def enable_proxy(dword):
+def enable_disable_proxy(dword):
 	"""
 	enable or disable proxy function within registry
+	
+	dword > 0x00000001 > Enabled
+	dword > 0x00000000 > Disabled
 	"""
+	HKEY_open = OpenKey(HKEY_CURRENT_USER,HKEY_key,0,KEY_ALL_ACCESS)
+
 	try:
-		SetValueEx(HKEY_open,"ProxyEnable",0,REG_DWORD,dword)
+		SetValueEx(HKEY_open,"ProxyEnable",0,REG_DWORD,int(dword))
 		CloseKey(HKEY_open)
-		return True
+		#print "[casper] Success ProxyEnable: {}".format(int(dword))
+		return True 
 	except Exception as e:
+		#print "[casper] Error ProxyEnable: {}".format(e)
 		return False
 
 def change_proxy(server,dword):
 	"""
 	intercept using proxy change > change_proxy("127.0.0.1:8080",0x00000001)
 	"""
-	if (enable_proxy(dword) == True):
+	HKEY_open = OpenKey(HKEY_CURRENT_USER,HKEY_key,0,KEY_ALL_ACCESS)
+	
+	if (enable_disable_proxy(int(dword)) == True):
 		try:
 			SetValueEx(HKEY_open,"ProxyServer",0,REG_SZ,server)
 			CloseKey(HKEY_open)
+			#print "[casper] Success ProxyServer: {}".format(server)
 			return True
 		except Exception as e:
+			#print "[casper] Error ProxyServer: {}".format(e)
 			return False
-	else:
-		return False
 
 def change_dns(server):
 	"""
