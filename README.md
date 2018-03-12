@@ -6,6 +6,7 @@ For educational use only!
     * shell cmd                   <sends shell command>
     * download url                <download and execute via shell>
     * schtasks create/delete/run  <create/delete/run schtasks tasks>
+    * intercept proxy/dns         <set a proxy or change dns server>
     * clone                       <clones myself to temp directory>
     * infect                      <adds itself to startup via registry>
     * screenshot                  <takes screenshot>
