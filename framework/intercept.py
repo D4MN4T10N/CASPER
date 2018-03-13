@@ -49,10 +49,16 @@ def change_dns(server):
 		for interface in wmi.Win32_NetworkAdapterConfiguration(IPEnabled=True):
 			set_dns_server = interface.SetDNSServerSearchOrder([server])
 			if (set_dns_server[0] == 0):
+				logging.debug("[casper] Successfully added dns server: {}".format(server))
 				return True
 			elif (set_dns_server[0] == 1):
+				logging.debug("[casper] Successfully added dns server: {}".format(server))
 				return True
+			elif (set_dns_server[0] == 91):
+				logging.debug("[casper] Error while adding dns server > Access Denied")
+				return False
 			else:
-				return False		
+				logging.debug("[casper] Error while adding dns server > Unknown error")
+				return False
 	except Exception as e:
-		return False
+		return False	
