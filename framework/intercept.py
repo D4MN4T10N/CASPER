@@ -52,7 +52,7 @@ def change_dns(server):
 				logging.debug("[casper] Successfully added dns server: {}".format(server))
 				return True
 			elif (set_dns_server[0] == 1):
-				logging.debug("[casper] Successfully added dns server: {}".format(server))
+				logging.debug("[casper] Successfully added dns server (reboot required): {}".format(server))
 				return True
 			elif (set_dns_server[0] == 91):
 				logging.debug("[casper] Error while adding dns server > Access Denied")
