@@ -18,27 +18,29 @@ def enable_disable_proxy(dword):
 	try:
 		SetValueEx(HKEY_open,"ProxyEnable",0,REG_DWORD,int(dword))
 		CloseKey(HKEY_open)
-		#print "[casper] Success ProxyEnable: {}".format(int(dword))
-		return True 
+		return True
 	except Exception as e:
-		#print "[casper] Error ProxyEnable: {}".format(e)
 		return False
 
 def change_proxy(server,dword):
 	"""
-	intercept using proxy change > change_proxy("127.0.0.1:8080",0x00000001)
+	intercept using proxy change > change_proxy("127.0.0.1:8080",1)
 	"""
 	HKEY_open = OpenKey(HKEY_CURRENT_USER,HKEY_key,0,KEY_ALL_ACCESS)
 	
+	logging.debug("[casper] Attempting to enable or disable proxy support: {}".format(dword))
 	if (enable_disable_proxy(int(dword)) == True):
+		logging.debug("[casper] Successfully enabled proxy support: {}".format(dword))
 		try:
 			SetValueEx(HKEY_open,"ProxyServer",0,REG_SZ,server)
 			CloseKey(HKEY_open)
-			#print "[casper] Success ProxyServer: {}".format(server)
+			logging.debug("[casper] Successfully added proxy server: {}".format(server))
 			return True
 		except Exception as e:
-			#print "[casper] Error ProxyServer: {}".format(e)
+			logging.debug("[casper] Error while adding proxy server: {}".format(e))
 			return False
+	else:
+		logging.debug("[casper] Error while enabling proxy support")
 
 def change_dns(server):
 	"""
@@ -52,7 +54,7 @@ def change_dns(server):
 				logging.debug("[casper] Successfully added dns server: {}".format(server))
 				return True
 			elif (set_dns_server[0] == 1):
-				logging.debug("[casper] Successfully added dns server (reboot required): {}".format(server))
+				logging.debug("[casper] Successfully added dns server: {}".format(server))
 				return True
 			elif (set_dns_server[0] == 91):
 				logging.debug("[casper] Error while adding dns server > Access Denied")
@@ -61,4 +63,5 @@ def change_dns(server):
 				logging.debug("[casper] Error while adding dns server > Unknown error")
 				return False
 	except Exception as e:
-		return False	
+		logging.debug("[casper] Error while adding dns server > Unknown error")
+		return False
