@@ -3,33 +3,21 @@ Part of Casper Framework
 '''
 from includes import *
 
-def enable_task(task_name):
+def enable_disable_task(task_name,status):
 	"""
-	enable a scheduled task, returns True if sucess and
+	enable or disable a scheduled task, returns True if sucess and
 	False if fails
+	
+	status /DISABLE or /ENABLE
 	"""
 	try:
-		schtasks = subprocess.Popen(['schtasks.exe','/Change','/TN',task_name,'/ENABLE'],
+		schtasks = subprocess.Popen(['schtasks.exe','/Change','/TN',task_name,status],
 									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		logging.debug("[casper] Enabled task: {}".format(task_name))
 		return True
 	except Exception as e:
 		logging.debug("[casper] Unable to enable task: {}".format(e))
 		return False
-
-def disable_task(task_name):
-	"""
-	disables a scheduled task, returns True if sucess and
-	False if fails
-	"""
-	try:
-		schtasks = subprocess.Popen(['schtasks.exe','/Change','/TN',task_name,'/DISABLE'],
-									stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		logging.debug("[casper] Disabled task: {}".format(task_name))
-		return True
-	except Exception as e:
-		logging.debug("[casper] Unable to disable task: {}".format(e))
-		return False		
 
 def create_task(task_name,file_name):
 	"""
