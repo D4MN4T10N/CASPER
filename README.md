@@ -18,7 +18,7 @@ Test the connection against google server before we connects back to command ser
 
 The sample server can only handle one connection at the time, might make a multithreaded one in the future.
 
-#### Anti-VM and Anti-Sandbox:
+#### Evasion techniques:
 * Lowest amount of total disk space accepted before executing
 * Lowest amount of total memory/ram accepted before executing
 * Go through all the running processes in attempt to find known processes
@@ -27,3 +27,6 @@ The sample server can only handle one connection at the time, might make a multi
 * Check if a debugger is present with IsDebuggerPresent
 * Check for user interaction before main code is executed
 * Check for known hostnames
+
+#### ToDo:
+* Bugfixes
