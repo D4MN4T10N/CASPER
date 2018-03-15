@@ -33,4 +33,7 @@ Navigate to \framework\ folder and edit includes.py to import your function, cal
 
 ### ToDo:
 - [ ] Bugfixes
+- [ ] Dummie-proof the whole shitz
 - [ ] Improve schtasks
+- [ ] Improve encoder
+- [ ] Improve shell
