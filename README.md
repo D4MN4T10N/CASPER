@@ -28,5 +28,9 @@ The sample server can only handle one connection at the time, might make a multi
 * Check for user interaction before main code is executed
 * Check for known hostnames
 
+### How to add a new function:
+Navigate to \framework\ folder and edit includes.py to import your function, call the function(s) from control.py, make sure your function returns True or False in order to make the response to C&C server easier. 
+
 ### ToDo:
-* Bugfixes
+- [ ] Bugfixes
+- [ ] Improve schtasks
