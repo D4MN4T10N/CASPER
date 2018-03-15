@@ -2,7 +2,7 @@
 
 For educational use only!
 
-#### Commands:
+### Commands:
     * shell cmd                   <sends shell command>
     * download url                <download and execute via shell>
     * schtasks create/delete/run  <create/delete/run schtasks tasks>
@@ -13,12 +13,12 @@ For educational use only!
     * removal                     <remove myself>
     * quit                        <quit server>
 
-#### C&C:
+### C&C:
 Test the connection against google server before we connects back to command server where we are listning for incoming connections. The data between server and CASPER is encoded with base64 using a key to obfuscate it a little bit.
 
 The sample server can only handle one connection at the time, might make a multithreaded one in the future.
 
-#### Evasion techniques:
+### Evasion techniques:
 * Lowest amount of total disk space accepted before executing
 * Lowest amount of total memory/ram accepted before executing
 * Go through all the running processes in attempt to find known processes
@@ -28,5 +28,5 @@ The sample server can only handle one connection at the time, might make a multi
 * Check for user interaction before main code is executed
 * Check for known hostnames
 
-#### ToDo:
+### ToDo:
 * Bugfixes
