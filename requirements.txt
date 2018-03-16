@@ -1,3 +1,4 @@
 wmi
 mss
 pypiwin32
+py2exe

