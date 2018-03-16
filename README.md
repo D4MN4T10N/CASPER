@@ -31,9 +31,6 @@ The sample server can only handle one connection at the time, might make a multi
 * Check for user interaction before main code is executed
 * Check for known hostnames
 
-#### Add a function(s):
-Navigate to \framework\ folder and edit includes.py to import your function, call the function(s) from control.py, make sure your function returns True or False in order to make the response to C&C server easier.
-
 #### Known issues:
 * Server only handles one connection at the same time
 * When building you might get Access Denied errors depending on OS (Rebuild until success)
