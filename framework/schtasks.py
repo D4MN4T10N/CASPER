@@ -1,7 +1,7 @@
-'''
+"""
 Part of Casper Framework
-'''
-from includes import *
+"""
+from imports import *
 
 def enable_disable_task(task_name,status):
 	"""
@@ -17,11 +17,11 @@ def enable_disable_task(task_name,status):
 		return True
 	except Exception as e:
 		logging.debug("[casper] Unable to enable task: {}".format(e))
-		return False
+		return False		
 
 def create_task(task_name,file_name):
 	"""
-	create a scheduled task as SYSTEM, returns True if sucess and
+	create a scheduled task as SYSTEM, returns True if success and
 	False if fails
 	"""
 	try:
@@ -35,7 +35,7 @@ def create_task(task_name,file_name):
 
 def del_task(task_name):
 	"""
-	delete a scheduled task, returns True if sucess and
+	delete a scheduled task, returns True if success and
 	False if fails
 	"""
 	try:
@@ -49,7 +49,7 @@ def del_task(task_name):
 
 def run_task(task_name):
 	"""
-	run a scheduled task, returns True if sucess and
+	run a scheduled task, returns True if success and
 	False if fails
 	"""
 	try:

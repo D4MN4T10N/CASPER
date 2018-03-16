@@ -1,7 +1,7 @@
 """
 Part of Casper Framework
 """
-from includes import *
+from imports import *
 
 def temp_directory():
 	"""
@@ -26,7 +26,7 @@ def clone(self):
 	read the binary data of given executable and saves it
 	in the temp directory
 	"""
-	logging.debug("[casper] Cloning myself, please wait...")
+	logging.debug("[casper] Cloning myself, please wait")
 	
 	try:
 		with open(self, "rb") as clone_file:
@@ -38,6 +38,7 @@ def clone(self):
 		file = open(os.path.join(temp_directory(),self),"wb")
 		file.write(byte)
 		file.close()
+		logging.debug("[casper] Cloning finished")
 		return True
 	except Exception as e:
 		logging.debug("[casper] Error, cannot write file on disk > {}".format(e))

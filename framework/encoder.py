@@ -1,9 +1,9 @@
-'''
+"""
 Part of Casper Framework
-'''
-from includes import *
+"""
+from imports import *
 
-key = 'Very long and confidential key LULZ'
+key = 'dfslsdfdsafsalasdldsfksdfksdfkmdsf'
 
 def encode(data):
 	"""

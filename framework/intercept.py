@@ -1,7 +1,7 @@
-'''
+"""
 Part of Casper Framework
-'''
-from includes import *
+"""
+from imports import *
 
 HKEY_key = r"Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 HKEY_create = CreateKey(HKEY_CURRENT_USER,HKEY_key)

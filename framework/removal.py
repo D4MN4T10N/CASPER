@@ -1,21 +1,7 @@
-'''
+"""
 Part of Casper Framework
-'''
-from includes import *
-
-def remove_payload(file):
-	"""
-	if we find the payload on disk, delete it and move on
-	"""
-	if (os.path.isfile(os.path.join(temp_directory(),file)) == True):
-		try:
-			os.remove(os.path.join(temp_directory(),file))
-			return True
-		except Exception as e:
-			return False
-	else:
-		logging.debug("[casper] payload not found")
-		return False
+"""
+from imports import *
 
 def payload(file):
 	"""
@@ -31,6 +17,20 @@ def payload(file):
 	except Exception as e:
 		return False
 
+def remove_payload(file):
+	"""
+	if we find the payload on disk, delete it and move on
+	"""
+	if (os.path.isfile(os.path.join(temp_directory(),file)) == True):
+		try:
+			os.remove(os.path.join(temp_directory(),file))
+			return True
+		except Exception as e:
+			return False
+	else:
+		logging.debug("[casper] payload not found")
+		return False
+		
 def payload_run(file):
 	"""
 	run the payload

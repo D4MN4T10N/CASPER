@@ -1,12 +1,15 @@
-'''
+"""
 Part of Casper Framework
-'''
-from includes import *
+"""
+from imports import *
 
 def hidden(value):
+	"""
+	get the console window and hide it
+	"""
 	try:
-		window = win32console.GetConsoleWindow()
-		win32gui.ShowWindow(window,value)
+		GetConsoleWindow = win32console.GetConsoleWindow()
+		win32gui.ShowWindow(GetConsoleWindow,value)
 		return True
 	except Exception as e:
 		return False
