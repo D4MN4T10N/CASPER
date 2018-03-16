@@ -3,7 +3,7 @@
 For educational use only!
 
 #### Installation:
-    * pip install -r requirements.txt
+    pip install -r requirements.txt
 
 #### Commands:
     * shell cmd                   <sends shell command>
