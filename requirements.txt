@@ -1,0 +1,3 @@
+wmi
+mss
+pypiwin32
