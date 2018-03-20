@@ -17,7 +17,8 @@ For educational use only!
     * quit                        <quit server>
 
 #### C&C:
-Test the connection against google server before we connects back to command server where we are listning for incoming connections. The data between server and CASPER is encoded with base64 using a key to obfuscate it a little bit.
+
+###### Reverse shell ###### Test the connection against google server before we connects back to command server where we are listning for incoming connections. The data between server and CASPER is encoded with base64 using a key to obfuscate it a little bit.
 
 The sample server can only handle one connection at the time, might make a multithreaded one in the future.
 
