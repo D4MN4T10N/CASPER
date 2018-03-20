@@ -18,9 +18,11 @@ For educational use only!
 
 #### C&C:
 
-###### Reverse shell
+###### Socket control
 > Test the connection against google server before we connects back to command server where we are listning for incoming connections. The data between server and CASPER is encoded with base64 using a key to obfuscate it a little bit.
 
+###### IRC control (under development)
+> Connect to IRC server and wait for commands from operator. Using nick and auth token to login on all bots that is currently in the channel if !auth command is typed in the channel. You can auth/control a single bot if you query a auth message to the bot you want to control and pass all the commands in the query as well.
 
 #### Evasion techniques:
 * Lowest amount of total disk space accepted before executing
