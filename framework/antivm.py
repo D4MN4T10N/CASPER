@@ -16,7 +16,6 @@ def disks():
 			if (disk.Size > DriveSize):
 				pass
 			else:
-				break
 				sys.exit()
 	except Exception as e:
 		pass				
